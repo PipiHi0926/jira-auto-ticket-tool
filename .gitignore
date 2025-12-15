@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+
+# User Data (避免上傳你的密碼和個人設定)
+config.json
+user_presets/
+
+# IDE
+.vscode/
+.idea/

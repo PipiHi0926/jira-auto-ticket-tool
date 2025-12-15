@@ -1,0 +1,89 @@
+{
+    "jira_url": "https://your-jira-instance.com",
+    "username": "",
+    "password": "",
+    "projects": [
+        {
+            "key": "MCC",
+            "name": "Major Change Center",
+            "description": "主要變更中心",
+            "default_issuetype": "Change",
+            "custom_fields": {
+                "Fab": {
+                    "label": "Fab",
+                    "type": "text",
+                    "required": true
+                },
+                "Phase": {
+                    "label": "Phase",
+                    "type": "text",
+                    "required": false
+                },
+                "Category": {
+                    "label": "Category",
+                    "type": "select",
+                    "options": [
+                        "Tool",
+                        "System - Others",
+                        "System - Software",
+                        "Hardware"
+                    ],
+                    "required": true
+                },
+                "Plan_Start_Time": {
+                    "label": "Plan Start Time",
+                    "type": "datetime",
+                    "required": true
+                },
+                "Plan_End_Time": {
+                    "label": "Plan End Time",
+                    "type": "datetime",
+                    "required": true
+                }
+            }
+        },
+        {
+            "key": "TC",
+            "name": "Task Center",
+            "description": "任務中心",
+            "default_issuetype": "Task",
+            "custom_fields": {
+                "task_category": {
+                    "label": "任務類別",
+                    "type": "select",
+                    "options": [
+                        "開發",
+                        "測試",
+                        "部署",
+                        "維護"
+                    ],
+                    "required": false
+                },
+                "estimated_hours": {
+                    "label": "預估工時",
+                    "type": "number",
+                    "required": false
+                }
+            }
+        },
+        {
+            "key": "AC",
+            "name": "AR Center",
+            "description": "AR 中心",
+            "default_issuetype": "Request",
+            "custom_fields": {
+                "request_type": {
+                    "label": "請求類型",
+                    "type": "select",
+                    "options": [
+                        "新增",
+                        "修改",
+                        "刪除"
+                    ],
+                    "required": false
+                }
+            }
+        }
+    ],
+    "default_project": "MCC"
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JIRA 自動開單工具">
+    <title>JIRA 自動開單工具</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎫 JIRA 自動開單工具</h1>
+            <p>選擇模板直接開單，Project 與欄位自動帶入</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="createIssueTab">📝 建立 Issue</button>
+            <button class="tab" data-tab="templatesTab">📋 模板管理</button>
+            <button class="tab" data-tab="settingsTab">⚙️ 設定</button>
+        </div>
+
+        <!-- Tab: 建立 Issue -->
+        <div id="createIssueTab" class="tab-content active">
+            <!-- 1. 選擇模板 -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">1. 選擇模板</h2>
+                </div>
+
+                <!-- 用戶自訂 Presets -->
+                <div id="userPresetSection" style="display:none; margin-bottom: 20px;">
+                    <h3 style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 10px;">⭐ 我的常用模板 (User
+                        Presets)</h3>
+                    <div id="userPresetGrid" class="template-list"></div>
+                    <div class="divider"></div>
+                </div>
+
+                <!-- 系統模板 -->
+                <h3 style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 10px;">🏢 系統標準模板 (System)</h3>
+                <div id="templateGrid" class="template-list"></div>
+            </div>
+
+            <!-- 2. 填寫內容 -->
+            <div class="card" id="issueFormCard" style="display: none;">
+                <div class="card-header">
+                    <h2 class="card-title">2. 填寫內容</h2>
+                    <!-- 顯示當前選中的模板資訊 -->
+                    <span id="currentTemplateBadge" class="badge badge-primary" style="margin-left: auto;"></span>
+                </div>
+
+                <form id="issueForm">
+                    <input type="hidden" id="projectKey">
+                    <input type="hidden" id="issueType">
+                    <!-- 紀錄這個表單是基於哪個系統模板 -->
+                    <input type="hidden" id="baseTemplateId">
+
+                    <div id="dynamicFieldsContainer"></div>
+
+                    <div class="divider"></div>
+
+                    <div style="display: flex; gap: 10px; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <button type="button" id="createIssue" class="btn btn-success">✅ 立即開單</button>
+                            <span id="targetInfo" style="color: var(--text-secondary); font-size: 0.9em;"></span>
+                        </div>
+
+                        <button type="button" id="saveAsPreset" class="btn btn-secondary" style="font-size: 0.9em;">
+                            💾 另存為我的常用模板
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tab: 模板管理 -->
+        <div id="templatesTab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">自定義模板</h2>
+                    <button id="refreshTemplates" class="btn btn-secondary btn-sm">🔄 重新載入</button>
+                </div>
+                <div class="alert alert-info">
+                    💡 提示：目前請直接編輯 <code>ticket_templates/templates.json</code> 來管理模板與欄位權限。
+                    <br>這能讓 ADMIN 擁有最大控制權（決定哪些欄位使用者需要填寫）。
+                </div>
+                <div id="templateManagerList" class="template-list"></div>
+            </div>
+        </div>
+
+        <!-- Tab: 設定 -->
+        <div id="settingsTab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">JIRA 連線設定</h2>
+                </div>
+                <form id="configForm">
+                    <div class="form-group">
+                        <label class="form-label">JIRA URL</label>
+                        <input type="text" id="jiraUrl" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">使用者名稱</label>
+                        <input type="text" id="username" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">密碼 / API Token</label>
+                        <input type="password" id="password" class="form-input" required>
+                    </div>
+                    <div class="divider"></div>
+                    <div style="display: flex; gap: var(--spacing-md);">
+                        <button type="button" id="saveConfig" class="btn btn-primary">💾 儲存設定</button>
+                        <button type="button" id="testConnection" class="btn btn-secondary">🔌 測試連線</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

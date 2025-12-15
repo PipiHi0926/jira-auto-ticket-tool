@@ -1,0 +1,65 @@
+{
+    "templates": [
+        {
+            "id": "template_1",
+            "project_key": "MCC",
+            "name": "參數調整 (MCC)",
+            "description": "MCC 系統參數調整申請",
+            "issuetype": "Change",
+            "visible_fields": [
+                "summary",
+                "description",
+                "components",
+                "custom_fields"
+            ],
+            "default_values": {
+                "summary": "【參數調整】",
+                "description": "## 變更目的\n\n## 調整參數\n| 參數名稱 | 原值 | 新值 | 原因 |\n|---|---|---|---|\n\n## 影響範圍\n",
+                "priority": "Medium",
+                "custom_fields": {
+                    "Fab": "12",
+                    "Category": "System - Software",
+                    "Phase": "N/A"
+                }
+            }
+        },
+        {
+            "id": "template_2",
+            "project_key": "TC",
+            "name": "一般開發任務 (TC)",
+            "description": "TC 日常開發工作",
+            "issuetype": "Task",
+            "visible_fields": [
+                "summary",
+                "description",
+                "priority",
+                "assignee",
+                "custom_fields"
+            ],
+            "default_values": {
+                "summary": "【開發】",
+                "description": "## 任務目標\n\n## 驗收標準\n- [ ] ",
+                "priority": "Medium",
+                "custom_fields": {
+                    "task_category": "開發",
+                    "estimated_hours": 8
+                }
+            }
+        },
+        {
+            "id": "template_3",
+            "project_key": "AC",
+            "name": "資源新增 (AC)",
+            "description": "AC 資源申請",
+            "issuetype": "Request",
+            "visible_fields": [
+                "summary",
+                "description"
+            ],
+            "default_values": {
+                "summary": "【新增資源】",
+                "description": "需新增資源項目：\n1. "
+            }
+        }
+    ]
+}
