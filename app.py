@@ -311,4 +311,20 @@ if __name__ == '__main__':
     os.makedirs('static/css', exist_ok=True)
     os.makedirs('static/js', exist_ok=True)
     
-    app.run(debug=True, host='127.0.0.1', port=5000)
+    # 檢查是否為首次運行 (建立預設 config)
+    if not os.path.exists('config.json') and os.path.exists('config_template.json'):
+         import shutil
+         shutil.copy('config_template.json', 'config.json')
+
+    # 自動開啟瀏覽器
+    import webbrowser
+    from threading import Timer
+    
+    def open_browser():
+        webbrowser.open_new('http://127.0.0.1:5000/')
+
+    # 延遲 1.5 秒開啟，確保 Server 已啟動
+    Timer(1.5, open_browser).start()
+
+    print("程式啟動中... 請稍候，瀏覽器將自動開啟。")
+    app.run(host='0.0.0.0', port=5000, debug=False)

@@ -9,3 +9,9 @@ user_presets/
 # IDE
 .vscode/
 .idea/
+
+# PyInstaller (打包相關，不要上傳)
+build/
+dist/
+*.spec
+
